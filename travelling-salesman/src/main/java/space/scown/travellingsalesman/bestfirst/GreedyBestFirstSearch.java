@@ -7,7 +7,6 @@
 package space.scown.travellingsalesman.bestfirst;
 
 import space.scown.travellingsalesman.graph.Arc;
-import space.scown.travellingsalesman.graph.Node;
 import space.scown.travellingsalesman.salesman.Parser;
 import space.scown.travellingsalesman.salesman.Path;
 import space.scown.travellingsalesman.salesman.Writer;
@@ -31,21 +30,21 @@ class GreedyBestFirstSearch {
 
         final Collection<Path> paths = new HashSet<>();
 
-        for(final Node<Integer> node : parser.getGraph().getNodes()){
+        for(final Integer node : parser.getGraph().getNodes()){
             final Path path = new Path();
-            final int i = node.getStored();
+            final int i = node;
             path.add(i,0);
 
             while(path.size()<parser.getSize()){
-                final Node<Integer> n = new Node<>(path.getLast());
+                final Integer n = path.getLast();
                 final Set<Arc<Integer>> arcs = parser.getGraph().startingAt(n);
                 boolean added = false;
 
                 while(!added){
                     final Arc<Integer> arc = Collections.min(arcs);
 
-                    if(!path.contains(arc.getEnd().getStored())){
-                        path.add(arc.getEnd().getStored(),arc.getWeight());
+                    if(!path.contains(arc.getEnd())){
+                        path.add(arc.getEnd(), arc.getWeight());
                         added = true;
                     }
                     else{
@@ -54,7 +53,7 @@ class GreedyBestFirstSearch {
                 }
             }
 
-            final Node<Integer> n = new Node<>(path.getLast());
+            final Integer n = path.getLast();
             final Iterable<Arc<Integer>> arcs = parser.getGraph().startingAt(n);
 
             for(final Arc<Integer> arc : arcs){

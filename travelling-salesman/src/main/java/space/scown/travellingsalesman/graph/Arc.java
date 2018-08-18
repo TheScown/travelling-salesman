@@ -6,59 +6,57 @@
 
 package space.scown.travellingsalesman.graph;
 
+public class Arc<T> implements Comparable<Arc<T>> {
+    private final T start;
+    private final T end;
+    private final int weight;
 
-public class Arc<T> implements Comparable<Arc<T>>{
-		
-		private final Node<T> start;
-		private final Node<T> end;
-		private final int weight;
-		
-		public Arc(final Node<T> start, final Node<T> end, final int weight){
-			this.start = start;
-			this.end = end;
-			this.weight = weight;
-		}
-		
-		public Node<T> getStart(){
-			return start;
-		}
-		
-		public Node<T> getEnd() {
-			return end;
-		}
-		
-		public int getWeight() {
-			return weight;
-		}
-		
-		public boolean isStart(final Node<T> n){
-			return start.equals(n);
-		}
-		
-		public boolean isEnd(final Node<T> n){
-			return end.equals(n);
-		}
-		
-		@SuppressWarnings("unchecked")
-		public boolean equals(final Object o){
-			if(getClass().equals(o.getClass())){
-				final Arc<T> a = (Arc<T>) o;
-				return (start.equals(a.getStart())&&end.equals(a.getEnd())&&weight==a.getWeight());
-			}
-			return false;
-		}
-		
-		public int hashCode() {
-			return start.hashCode() + end.hashCode() + weight;
-		}
-		
-		public String toString(){
-			return "("+start.toString()+","+end.toString()+","+weight+")";
-		}
-		
-		public int compareTo(final Arc<T> o){
-			return weight - o.getWeight();
-		}
+    public Arc(final T start, final T end, final int weight) {
+        this.start = start;
+        this.end = end;
+        this.weight = weight;
+    }
+
+    public T getStart() {
+        return start;
+    }
+
+    public T getEnd() {
+        return end;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    boolean isStart(final T n) {
+        return start.equals(n);
+    }
+
+    public boolean isEnd(final T n) {
+        return end.equals(n);
+    }
+
+    @SuppressWarnings("unchecked")
+    public boolean equals(final Object o) {
+        if (getClass().equals(o.getClass())) {
+            final Arc<T> a = (Arc<T>) o;
+            return (start.equals(a.start) && end.equals(a.end) && weight == a.getWeight());
+        }
+        return false;
+    }
+
+    public int hashCode() {
+        return start.hashCode() + end.hashCode() + weight;
+    }
+
+    public String toString() {
+        return "(" + start.toString() + "," + end.toString() + "," + weight + ")";
+    }
+
+    public int compareTo(final Arc<T> o) {
+        return weight - o.weight;
+    }
 
 
 }

@@ -8,7 +8,6 @@ package space.scown.travellingsalesman.minedge;
 
 import space.scown.travellingsalesman.graph.Arc;
 import space.scown.travellingsalesman.graph.Graph;
-import space.scown.travellingsalesman.graph.Node;
 import space.scown.travellingsalesman.salesman.Parser;
 import space.scown.travellingsalesman.salesman.Path;
 import space.scown.travellingsalesman.salesman.Writer;
@@ -40,8 +39,8 @@ class MinimumEdgeSearch {
 			final Arc<Integer> min = Collections.min(arcs);
 			arcs.remove(min);
 			
-			final Node<Integer> minStart = min.getStart();
-			final Node<Integer> minEnd = min.getEnd();
+			final Integer minStart = min.getStart();
+			final Integer minEnd = min.getEnd();
 			
 			arcs.remove(new Arc<>(minEnd, minStart, min.getWeight()));
 
@@ -54,15 +53,15 @@ class MinimumEdgeSearch {
 		}
 		
 		final Path path = new Path();
-		final Node<Integer> startNode = new Node<>(1);
+		final Integer startNode = 1;
 		Arc<Integer> leg = minGraph.getNextLeg(startNode);
-		path.add(startNode.getStored(),leg.getWeight());
+		path.add(startNode,leg.getWeight());
 		
-		Node<Integer> pathNode = minGraph.getNextCity(startNode);
+		Integer pathNode = minGraph.getNextCity(startNode);
 		leg = minGraph.getNextLeg(pathNode);
 		
 		while(!(leg.getStart().equals(startNode))) {
-			path.add(pathNode.getStored(), leg.getWeight());
+			path.add(pathNode, leg.getWeight());
 			pathNode = minGraph.getNextCity(pathNode);
 			leg = minGraph.getNextLeg(pathNode);
 		}

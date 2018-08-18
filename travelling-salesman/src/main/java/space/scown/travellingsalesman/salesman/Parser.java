@@ -8,7 +8,6 @@ package space.scown.travellingsalesman.salesman;
 
 import space.scown.travellingsalesman.graph.Arc;
 import space.scown.travellingsalesman.graph.Graph;
-import space.scown.travellingsalesman.graph.Node;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -44,9 +43,8 @@ public class Parser {
         final String sizeString = sizeParts[1].trim();
         size = Integer.parseInt(sizeString);
 
-        final List<Node<Integer>> nodes = IntStream.range(1, size + 1)
+        final List<Integer> nodes = IntStream.range(1, size + 1)
                 .boxed()
-                .map(Node::new)
                 .collect(Collectors.toList());
 
         final Iterator<Integer> nodeIndices = parts.subList(2, parts.size()).stream()
