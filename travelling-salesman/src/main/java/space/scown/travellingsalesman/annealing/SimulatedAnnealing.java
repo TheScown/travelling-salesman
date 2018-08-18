@@ -18,7 +18,7 @@ import java.util.Random;
 //import java.util.Iterator;
 //import java.util.Collections;
 
-class SimulatedAnnealing {
+public class SimulatedAnnealing {
 
 	/**
 	 * A simulated space.scown.travellingsalesman.annealing algorithm

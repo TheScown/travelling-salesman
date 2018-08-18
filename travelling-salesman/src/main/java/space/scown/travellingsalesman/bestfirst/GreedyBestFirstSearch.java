@@ -19,7 +19,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-class GreedyBestFirstSearch {
+public class GreedyBestFirstSearch {
 
     /**
      * A greedy best first search algorithm.  From each city,

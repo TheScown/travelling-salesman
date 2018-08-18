@@ -6,6 +6,8 @@
 
 package space.scown.travellingsalesman.runner;
 
+import space.scown.travellingsalesman.annealing.SimulatedAnnealing;
+import space.scown.travellingsalesman.bestfirst.GreedyBestFirstSearch;
 import space.scown.travellingsalesman.genetic.GeneticAlgorithm;
 
 import java.io.BufferedWriter;
@@ -25,12 +27,9 @@ class Runner {
 		"file48",
 		"file58",
 		"file175",
-		"file180"/*,
-		"file535"*/};
-	
-	/**
-	 * @param args
-	 */
+		"file180",
+		"file535"};
+
 	public static void main(final String[] args) throws IOException{
 		final BufferedWriter writer = new BufferedWriter(new FileWriter("times.txt"));
 		for(final String filename : files){
@@ -38,20 +37,20 @@ class Runner {
 			writer.newLine();
 			
 			final String[] string = new String[1];
-			/*string[0] = filename.concat("a.txt");
-			long greedyStartTime = System.currentTimeMillis();
+			string[0] = filename.concat("a.txt");
+			final long greedyStartTime = System.currentTimeMillis();
 			GreedyBestFirstSearch.main(string);
-			long greedyEndTime = System.currentTimeMillis();
+			final long greedyEndTime = System.currentTimeMillis();
 			writer.write("Greedy: "+((greedyEndTime - greedyStartTime)/1000));
-			writer.newLine();*/
+			writer.newLine();
 			
 			
-			/*string[0] = filename.concat("b.txt");
-			long annealingStartTime = System.currentTimeMillis();
+			string[0] = filename.concat("b.txt");
+			final long annealingStartTime = System.currentTimeMillis();
 			SimulatedAnnealing.main(string);
-			long annealingEndTime = System.currentTimeMillis();
+			final long annealingEndTime = System.currentTimeMillis();
 			writer.write("Annealing: "+((annealingEndTime - annealingStartTime)/1000));
-			writer.newLine();*/
+			writer.newLine();
 			
 			string[0] = filename.concat("c.txt");
 			final long geneticStartTime = System.currentTimeMillis();
