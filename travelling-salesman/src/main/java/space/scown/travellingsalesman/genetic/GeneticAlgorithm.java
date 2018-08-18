@@ -6,7 +6,8 @@
 
 package space.scown.travellingsalesman.genetic;
 
-import salesman.*;
+import space.scown.travellingsalesman.salesman.Parser;
+import space.scown.travellingsalesman.salesman.Writer;
 
 import java.util.ArrayList;
 import java.util.Collections;
