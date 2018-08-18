@@ -25,7 +25,7 @@ public class AnnealingPath extends space.scown.travellingsalesman.salesman.Path 
 	private AnnealingPath(final AnnealingPath path){
 		super();
 		this.parser = path.getParser();
-		this.path = new ArrayList<Integer>(path.getPath());
+		this.path = new ArrayList<>(path.getPath());
 		this.length = path.getLength();
 	}
 
@@ -35,7 +35,7 @@ public class AnnealingPath extends space.scown.travellingsalesman.salesman.Path 
 	
 	public AnnealingPath swap(final int i, final int j){
 		final AnnealingPath newPath = new AnnealingPath(this);
-		final ArrayList<Integer> p = new ArrayList<Integer>(newPath.getPath());
+		final ArrayList<Integer> p = new ArrayList<>(newPath.getPath());
 		final int a = p.get(i);
 		p.set(i,p.get(j));
 		p.set(j,a);
@@ -50,8 +50,8 @@ public class AnnealingPath extends space.scown.travellingsalesman.salesman.Path 
 	private int recomputeLength(){
 		int newLength = 0;
 		for(int i = 0;i<size()-1;i++){
-			final Node<Integer> start = new Node<Integer>(path.get(i));
-			final Node<Integer> end = new Node<Integer>(path.get(i+1));
+			final Node<Integer> start = new Node<>(path.get(i));
+			final Node<Integer> end = new Node<>(path.get(i + 1));
 			newLength = parser.getGraph().distance(start, end);
 		}
 		return newLength;
@@ -67,14 +67,14 @@ public class AnnealingPath extends space.scown.travellingsalesman.salesman.Path 
 		while(path.size() < size){
 			final int next = randomGen.nextInt(size) + 1;
 			if(!path.contains(next)){
-				final Node<Integer> n1 = new Node<Integer>(path.getLast());
-				final Node<Integer> n2 = new Node<Integer>(next);
+				final Node<Integer> n1 = new Node<>(path.getLast());
+				final Node<Integer> n2 = new Node<>(next);
 				final int distance = parser.getGraph().distance(n1, n2);
 				path.add(next,distance);
 			}
 		}
-		final Node<Integer> n1 = new Node<Integer>(start);
-		final Node<Integer> n2 = new Node<Integer>(path.getLast());
+		final Node<Integer> n1 = new Node<>(start);
+		final Node<Integer> n2 = new Node<>(path.getLast());
 		path.add(start, parser.getGraph().distance(n1,n2));
 		return path;
 	}

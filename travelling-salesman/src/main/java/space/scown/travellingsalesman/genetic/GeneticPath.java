@@ -27,7 +27,7 @@ public class GeneticPath extends Path {
 	private GeneticPath(final GeneticPath path){
 		super();
 		this.parser = path.getParser();
-		this.path = new ArrayList<Integer>(path.getPath());
+		this.path = new ArrayList<>(path.getPath());
 		this.length = path.getLength();
 	}
 	
@@ -50,27 +50,27 @@ public class GeneticPath extends Path {
 		while(path.size() < size){
 			final int next = randomGen.nextInt(size) + 1;
 			if(!path.contains(next)){
-				final Node<Integer> n1 = new Node<Integer>(path.getLast());
-				final Node<Integer> n2 = new Node<Integer>(next);
+				final Node<Integer> n1 = new Node<>(path.getLast());
+				final Node<Integer> n2 = new Node<>(next);
 				final int distance = parser.getGraph().distance(n1, n2);
 				path.add(next,distance);
 			}
 		}
-		final Node<Integer> n1 = new Node<Integer>(start);
-		final Node<Integer> n2 = new Node<Integer>(path.getLast());
+		final Node<Integer> n1 = new Node<>(start);
+		final Node<Integer> n2 = new Node<>(path.getLast());
 		path.add(start, parser.getGraph().distance(n1,n2));
 		return path;
 	}
 	
 	public GeneticPath breed(final GeneticPath p2){
-		final ArrayList<Integer> path1 = new ArrayList<Integer>(path);
-		final ArrayList<Integer> path2 = new ArrayList<Integer>(p2.getPath());
+		final ArrayList<Integer> path1 = new ArrayList<>(path);
+		final ArrayList<Integer> path2 = new ArrayList<>(p2.getPath());
 		final Random random = new Random();
 		path1.remove(path1.size()-1);
 		path2.remove(path2.size()-1);
 		final int breedLength = random.nextInt(path1.size());
-		ArrayList<Integer> newPath1 = new ArrayList<Integer>();
-		ArrayList<Integer> newPath2 = new ArrayList<Integer>();
+		ArrayList<Integer> newPath1 = new ArrayList<>();
+		ArrayList<Integer> newPath2 = new ArrayList<>();
 		for(int i = 0;i<breedLength;i++){
 			newPath1.add(i,path1.get(i));
 			newPath2.add(i,path2.get(i));
@@ -85,15 +85,15 @@ public class GeneticPath extends Path {
 		child1.setPath(newPath1);
 		final GeneticPath child2 = new GeneticPath(parser);
 		child2.setPath(newPath2);
-		final HashSet<GeneticPath> paths = new HashSet<GeneticPath>();
+		final HashSet<GeneticPath> paths = new HashSet<>();
 		paths.add(child1);
 		paths.add(child2);
 		return Collections.min(paths);
 	}
 	
 	private ArrayList<Integer> fix(final ArrayList<Integer> p){
-		final ArrayList<Integer> missing = new ArrayList<Integer>();
-		final ArrayList<Integer> doubled = new ArrayList<Integer>();
+		final ArrayList<Integer> missing = new ArrayList<>();
+		final ArrayList<Integer> doubled = new ArrayList<>();
 		for(int i = 1;i<=p.size();i++){
 			int count = 0;
 			for (final Integer aP : p) {
@@ -112,7 +112,7 @@ public class GeneticPath extends Path {
 			p.set(p.indexOf(doubled.get(i)),missing.get(i));
 		}
 		p.add(p.get(0));
-		return new ArrayList<Integer>(p);
+		return new ArrayList<>(p);
 	}
 	
 	public GeneticPath swap(final int i, final int j){
@@ -131,8 +131,8 @@ public class GeneticPath extends Path {
 	private int recomputeLength(){
 		int newLength = 0;
 		for(int i = 0;i<size()-1;i++){
-			final Node<Integer> start = new Node<Integer>(path.get(i));
-			final Node<Integer> end = new Node<Integer>(path.get(i+1));
+			final Node<Integer> start = new Node<>(path.get(i));
+			final Node<Integer> end = new Node<>(path.get(i + 1));
 			newLength = parser.getGraph().distance(start, end);
 		}
 		return newLength;

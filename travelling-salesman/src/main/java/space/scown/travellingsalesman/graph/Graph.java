@@ -26,7 +26,7 @@ public class Graph<T> {
 	}
 	
 	protected HashSet<Node<T>>successors(final Node<T> node){
-		final HashSet<Node<T>> successors = new HashSet<Node<T>>();
+		final HashSet<Node<T>> successors = new HashSet<>();
 		for(final Arc<T> arc : arcs){
 			if(arc.isStart(node)){
 				successors.add(arc.getEnd());
@@ -36,7 +36,7 @@ public class Graph<T> {
 	}
 
 	public HashSet<Arc<T>> startingAt(final Node<T> node){
-		final HashSet<Arc<T>> startingAt = new HashSet<Arc<T>>();
+		final HashSet<Arc<T>> startingAt = new HashSet<>();
 		for(final Arc<T> arc : arcs){
 			if(arc.isStart(node)){
 				startingAt.add(arc);
@@ -46,7 +46,7 @@ public class Graph<T> {
 	}
 	
 	public HashSet<Arc<T>> endingAt(final Node<T> node){
-		final HashSet<Arc<T>> endingAt = new HashSet<Arc<T>>();
+		final HashSet<Arc<T>> endingAt = new HashSet<>();
 		for(final Arc<T> arc : arcs){
 			if(arc.isEnd(node)){
 				endingAt.add(arc);

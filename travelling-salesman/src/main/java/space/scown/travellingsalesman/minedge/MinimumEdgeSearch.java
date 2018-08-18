@@ -35,7 +35,7 @@ class MinimumEdgeSearch {
 		
 		final Graph<Integer> graph = parser.getGraph();
 		final HashSet<Arc<Integer>> arcs = graph.getArcs();
-		final MinGraph<Integer> minGraph = new MinGraph<Integer>(graph.getNodes(), new HashSet<Arc<Integer>>());
+		final MinGraph<Integer> minGraph = new MinGraph<>(graph.getNodes(), new HashSet<>());
 		while(!arcs.isEmpty()) {
 			final Arc<Integer> min = Collections.min(arcs);
 			arcs.remove(min);
@@ -43,15 +43,9 @@ class MinimumEdgeSearch {
 			final Node<Integer> minStart = min.getStart();
 			final Node<Integer> minEnd = min.getEnd();
 			
-			arcs.remove(new Arc<Integer>(minEnd,minStart,min.getWeight()));
-			
-			final Iterator<Arc<Integer>> it = arcs.iterator();
-			while(it.hasNext()){
-				final Arc<Integer> a = it.next();
-				if(a.getStart().equals(minStart) || a.getEnd().equals(minEnd)) {
-					it.remove();
-				}
-			}
+			arcs.remove(new Arc<>(minEnd, minStart, min.getWeight()));
+
+			arcs.removeIf(a -> a.getStart().equals(minStart) || a.getEnd().equals(minEnd));
 			
 			
 			if((minGraph.startingAt(minStart).isEmpty()) && (minGraph.endingAt(minEnd).isEmpty())) {
@@ -60,7 +54,7 @@ class MinimumEdgeSearch {
 		}
 		
 		final Path path = new Path();
-		final Node<Integer> startNode = new Node<Integer>(1);
+		final Node<Integer> startNode = new Node<>(1);
 		Arc<Integer> leg = minGraph.getNextLeg(startNode);
 		path.add(startNode.getStored(),leg.getWeight());
 		

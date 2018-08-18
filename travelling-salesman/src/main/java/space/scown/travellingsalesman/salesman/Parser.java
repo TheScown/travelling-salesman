@@ -43,25 +43,25 @@ public class Parser {
 		final String sizeString = sizeParts[1].trim();
 		size = Integer.parseInt(sizeString);
 		
-		final HashSet<Node<Integer>> nodes = new HashSet<Node<Integer>>();
+		final HashSet<Node<Integer>> nodes = new HashSet<>();
 		final Node<Integer>[] nodeArray = new Node[size];
 		for(int i = 0;i<size;i++){
-			nodeArray[i] = new Node<Integer>(i+1);
+			nodeArray[i] = new Node<>(i + 1);
 		}
         Collections.addAll(nodes, nodeArray);
 		
-		final HashSet<Arc<Integer>> arcs = new HashSet<Arc<Integer>>();
+		final HashSet<Arc<Integer>> arcs = new HashSet<>();
 		int j = 2;
 		for(int k = 0;k<size;k++){
 			for(int l = k+1;l<size;l++){
 				final int weight = Integer.parseInt(parts[j]);
-				arcs.add(new Arc<Integer>(nodeArray[k],nodeArray[l],weight));
-				arcs.add(new Arc<Integer>(nodeArray[l],nodeArray[k],weight));
+				arcs.add(new Arc<>(nodeArray[k], nodeArray[l], weight));
+				arcs.add(new Arc<>(nodeArray[l], nodeArray[k], weight));
 				j++;
 			}
 		}
 		
-		graph = new Graph<Integer>(nodes,arcs);
+		graph = new Graph<>(nodes, arcs);
 	}
 	
 	public String getName(){

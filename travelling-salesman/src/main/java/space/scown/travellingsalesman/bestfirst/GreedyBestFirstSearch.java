@@ -27,13 +27,14 @@ class GreedyBestFirstSearch {
     public static void main(final String[] args) throws IOException {
         final Parser parser = new Parser(args[0]);
 
-        final HashSet<Path> paths = new HashSet<Path>();
+        final HashSet<Path> paths = new HashSet<>();
+
         for(final Node<Integer> node : parser.getGraph().getNodes()){
             final Path path = new Path();
             final int i = node.getStored();
             path.add(i,0);
             while(path.size()<parser.getSize()){
-                final Node<Integer> n = new Node<Integer>(path.getLast());
+                final Node<Integer> n = new Node<>(path.getLast());
                 final HashSet<Arc<Integer>> arcs = parser.getGraph().startingAt(n);
                 boolean added = false;
                 while(!added){
@@ -48,7 +49,7 @@ class GreedyBestFirstSearch {
                 }
 
             }
-            final Node<Integer> n = new Node<Integer>(path.getLast());
+            final Node<Integer> n = new Node<>(path.getLast());
             final HashSet<Arc<Integer>> arcs = parser.getGraph().startingAt(n);
             for(final Arc<Integer> arc : arcs){
                 if(arc.isEnd(node)){

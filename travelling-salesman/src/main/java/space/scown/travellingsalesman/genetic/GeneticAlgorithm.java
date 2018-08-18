@@ -30,13 +30,13 @@ public class GeneticAlgorithm {
 			System.out.println("Some sort of error occurred.  Check the file was formatted correctly");
 			return;
 		}
-		ArrayList<GeneticPath> population = new ArrayList<GeneticPath>();
+		ArrayList<GeneticPath> population = new ArrayList<>();
 		for(int i = 0;i<POPULATION_SIZE;i++){
 			population.add(GeneticPath.generateRandomPath(parser));
 		}
 		GeneticPath finalPath = null;
 		for(int g = 0;g<GENERATIONS;g++){
-			final ArrayList<GeneticPath> newPopulation = new ArrayList<GeneticPath>();
+			final ArrayList<GeneticPath> newPopulation = new ArrayList<>();
 			for(int p = 0; p<POPULATION_SIZE;p++){
 				final GeneticPath p1 = getRandomMember(population);
 				final GeneticPath p2 = getRandomMember(population);

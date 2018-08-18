@@ -14,7 +14,7 @@ public class Path implements Comparable<Path>{
 	
 	public Path(){
 		length = 0;
-		path = new ArrayList<Integer>();
+		path = new ArrayList<>();
 	}
 	
 	public void add(final int city, final int lengthIncrease){
