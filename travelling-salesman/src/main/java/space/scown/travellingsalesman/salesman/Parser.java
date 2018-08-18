@@ -12,6 +12,7 @@ import space.scown.travellingsalesman.graph.Node;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
 
@@ -22,7 +23,7 @@ public class Parser {
 	private Graph<Integer> graph;
 	
 	@SuppressWarnings("unchecked")
-	public Parser(String filename)throws Exception{
+	public Parser(String filename) throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader(filename));
 		String line = reader.readLine();
 		String data = "";
