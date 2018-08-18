@@ -9,7 +9,7 @@ package space.scown.travellingsalesman.salesman;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Writer {
 	
@@ -29,7 +29,7 @@ public class Writer {
 		writer.write(line3);
 		writer.newLine();
 		
-		final ArrayList<Integer> cities = path.getPath();
+		final List<Integer> cities = path.getPath();
 		String line4 = "";
 		for(int i = 0;i<cities.size()-2;i++){
 			line4+=cities.get(i)+",";

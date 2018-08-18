@@ -11,9 +11,12 @@ import space.scown.travellingsalesman.salesman.Parser;
 import space.scown.travellingsalesman.salesman.Path;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class GeneticPath extends Path {
 	
@@ -42,7 +45,7 @@ public class GeneticPath extends Path {
 
 	public static GeneticPath generateRandomPath(final Parser parser) {
 		final GeneticPath path = new GeneticPath(parser);
-		final HashSet<Node<Integer>> nodes = parser.getGraph().getNodes();
+		final Set<Node<Integer>> nodes = parser.getGraph().getNodes();
 		final int size = nodes.size();
 		final Random randomGen = new Random();
 		final int start = randomGen.nextInt(size) + 1;
@@ -63,8 +66,8 @@ public class GeneticPath extends Path {
 	}
 	
 	public GeneticPath breed(final GeneticPath p2){
-		final ArrayList<Integer> path1 = new ArrayList<>(path);
-		final ArrayList<Integer> path2 = new ArrayList<>(p2.getPath());
+		final List<Integer> path1 = new ArrayList<>(path);
+		final List<Integer> path2 = new ArrayList<>(p2.getPath());
 		final Random random = new Random();
 		path1.remove(path1.size()-1);
 		path2.remove(path2.size()-1);
@@ -85,15 +88,15 @@ public class GeneticPath extends Path {
 		child1.setPath(newPath1);
 		final GeneticPath child2 = new GeneticPath(parser);
 		child2.setPath(newPath2);
-		final HashSet<GeneticPath> paths = new HashSet<>();
+		final Collection<GeneticPath> paths = new HashSet<>();
 		paths.add(child1);
 		paths.add(child2);
 		return Collections.min(paths);
 	}
 	
 	private ArrayList<Integer> fix(final ArrayList<Integer> p){
-		final ArrayList<Integer> missing = new ArrayList<>();
-		final ArrayList<Integer> doubled = new ArrayList<>();
+		final List<Integer> missing = new ArrayList<>();
+		final List<Integer> doubled = new ArrayList<>();
 		for(int i = 1;i<=p.size();i++){
 			int count = 0;
 			for (final Integer aP : p) {

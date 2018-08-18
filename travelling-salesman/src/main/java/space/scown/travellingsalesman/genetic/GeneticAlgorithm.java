@@ -11,6 +11,7 @@ import space.scown.travellingsalesman.salesman.Writer;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 //import java.util.Iterator;
@@ -30,13 +31,13 @@ public class GeneticAlgorithm {
 			System.out.println("Some sort of error occurred.  Check the file was formatted correctly");
 			return;
 		}
-		ArrayList<GeneticPath> population = new ArrayList<>();
+		List<GeneticPath> population = new ArrayList<>();
 		for(int i = 0;i<POPULATION_SIZE;i++){
 			population.add(GeneticPath.generateRandomPath(parser));
 		}
 		GeneticPath finalPath = null;
 		for(int g = 0;g<GENERATIONS;g++){
-			final ArrayList<GeneticPath> newPopulation = new ArrayList<>();
+			final List<GeneticPath> newPopulation = new ArrayList<>();
 			for(int p = 0; p<POPULATION_SIZE;p++){
 				final GeneticPath p1 = getRandomMember(population);
 				final GeneticPath p2 = getRandomMember(population);
@@ -65,7 +66,7 @@ public class GeneticAlgorithm {
 		}
 	}
 	
-	private static GeneticPath getRandomMember(final ArrayList<GeneticPath> population){
+	private static GeneticPath getRandomMember(final List<GeneticPath> population){
 		final Random random = new Random();
 		GeneticPath path = null;
 		Collections.sort(population);

@@ -16,7 +16,7 @@ import space.scown.travellingsalesman.salesman.Writer;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.Set;
 
 class MinimumEdgeSearch {
 
@@ -34,7 +34,7 @@ class MinimumEdgeSearch {
 		}
 		
 		final Graph<Integer> graph = parser.getGraph();
-		final HashSet<Arc<Integer>> arcs = graph.getArcs();
+		final Set<Arc<Integer>> arcs = graph.getArcs();
 		final MinGraph<Integer> minGraph = new MinGraph<>(graph.getNodes(), new HashSet<>());
 		while(!arcs.isEmpty()) {
 			final Arc<Integer> min = Collections.min(arcs);

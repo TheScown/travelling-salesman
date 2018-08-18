@@ -10,8 +10,8 @@ import space.scown.travellingsalesman.graph.Node;
 import space.scown.travellingsalesman.salesman.Parser;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class AnnealingPath extends space.scown.travellingsalesman.salesman.Path {
 
@@ -59,7 +59,7 @@ public class AnnealingPath extends space.scown.travellingsalesman.salesman.Path 
 	
 	public static AnnealingPath generateRandomPath(final Parser parser) {
 		final AnnealingPath path = new AnnealingPath(parser);
-		final HashSet<Node<Integer>> nodes = parser.getGraph().getNodes();
+		final Set<Node<Integer>> nodes = parser.getGraph().getNodes();
 		final int size = nodes.size();
 		final Random randomGen = new Random();
 		final int start = randomGen.nextInt(size) + 1;

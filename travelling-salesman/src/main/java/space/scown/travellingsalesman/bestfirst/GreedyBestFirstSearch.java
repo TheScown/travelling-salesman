@@ -13,8 +13,10 @@ import space.scown.travellingsalesman.salesman.Path;
 import space.scown.travellingsalesman.salesman.Writer;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 
 class GreedyBestFirstSearch {
 
@@ -27,7 +29,7 @@ class GreedyBestFirstSearch {
     public static void main(final String[] args) throws IOException {
         final Parser parser = new Parser(args[0]);
 
-        final HashSet<Path> paths = new HashSet<>();
+        final Collection<Path> paths = new HashSet<>();
 
         for(final Node<Integer> node : parser.getGraph().getNodes()){
             final Path path = new Path();
@@ -36,7 +38,7 @@ class GreedyBestFirstSearch {
 
             while(path.size()<parser.getSize()){
                 final Node<Integer> n = new Node<>(path.getLast());
-                final HashSet<Arc<Integer>> arcs = parser.getGraph().startingAt(n);
+                final Set<Arc<Integer>> arcs = parser.getGraph().startingAt(n);
                 boolean added = false;
 
                 while(!added){
@@ -53,7 +55,7 @@ class GreedyBestFirstSearch {
             }
 
             final Node<Integer> n = new Node<>(path.getLast());
-            final HashSet<Arc<Integer>> arcs = parser.getGraph().startingAt(n);
+            final Iterable<Arc<Integer>> arcs = parser.getGraph().startingAt(n);
 
             for(final Arc<Integer> arc : arcs){
                 if(arc.isEnd(node)){

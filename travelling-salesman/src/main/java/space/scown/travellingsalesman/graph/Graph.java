@@ -5,23 +5,25 @@
  */
 
 package space.scown.travellingsalesman.graph;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 public class Graph<T> {
 
-	private final HashSet<Node<T>> nodes;
-	protected final HashSet<Arc<T>> arcs;
+	private final Set<Node<T>> nodes;
+	protected final Set<Arc<T>> arcs;
 
-	public Graph(final HashSet<Node<T>> nodes, final HashSet<Arc<T>> arcs){
+	public Graph(final Set<Node<T>> nodes, final Set<Arc<T>> arcs){
 		this.nodes = nodes;
 		this.arcs = arcs;
 	}
 	
-	public HashSet<Node<T>> getNodes(){
+	public Set<Node<T>> getNodes(){
 		return nodes;
 	}
 	
-	public HashSet<Arc<T>> getArcs(){
+	public Set<Arc<T>> getArcs(){
 		return arcs;
 	}
 	
@@ -45,8 +47,8 @@ public class Graph<T> {
 		return startingAt;
 	}
 	
-	public HashSet<Arc<T>> endingAt(final Node<T> node){
-		final HashSet<Arc<T>> endingAt = new HashSet<>();
+	public Collection<Arc<T>> endingAt(final Node<T> node){
+		final Collection<Arc<T>> endingAt = new HashSet<>();
 		for(final Arc<T> arc : arcs){
 			if(arc.isEnd(node)){
 				endingAt.add(arc);
@@ -61,7 +63,7 @@ public class Graph<T> {
 
 	public int distance(final Node<T> n1, final Node<T> n2)throws IllegalArgumentException{
 		if(succeeds(n1,n2)){
-			final HashSet<Arc<T>> arcs = startingAt(n1);
+			final Iterable<Arc<T>> arcs = startingAt(n1);
 			int distance = 0;
 			for(final Arc<T> arc : arcs){
 				if(arc.isEnd(n2)){
