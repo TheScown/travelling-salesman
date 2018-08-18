@@ -51,7 +51,7 @@ public class AnnealingPath extends space.scown.travellingsalesman.salesman.Path 
         for (int i = 0; i < size() - 1; i++) {
             final Integer start = path.get(i);
             final Integer end = path.get(i + 1);
-            newLength = parser.getGraph().distance(start, end);
+            newLength += parser.getGraph().distance(start, end);
         }
         return newLength;
     }
