@@ -6,13 +6,14 @@
 
 package space.scown.travellingsalesman.graph;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Graph<T> {
+public class Graph<T extends Comparable<T>> {
 
     private final Map<T, Set<Arc<T>>> table = new HashMap<>();
 
@@ -23,7 +24,7 @@ public class Graph<T> {
 
         for (final Arc<T> arc : arcs) {
             if (!table.containsKey(arc.getStart())) {
-                table.put(arc.getStart(), new TreeSet<>());
+                table.put(arc.getStart(), new TreeSet<>(new ArcComparator()));
             }
 
             table.get(arc.getStart()).add(arc);
@@ -45,6 +46,25 @@ public class Graph<T> {
                 .map(Arc::getWeight);
 
         return weight.orElseThrow(() -> new IllegalArgumentException("Nodes not adjacent"));
+    }
+
+    private class ArcComparator implements Comparator<Arc<T>> {
+        @Override
+        public int compare(final Arc<T> o1, final Arc<T> o2) {
+            final int weightDiff = Integer.compare(o1.getWeight(), o2.getWeight());
+
+            if (weightDiff != 0) {
+                return weightDiff;
+            }
+
+            final int startDiff = Comparator.<Arc<T>, T>comparing(Arc::getStart).compare(o1, o2);
+
+            if (startDiff != 0) {
+                return startDiff;
+            }
+
+            return Comparator.<Arc<T>, T>comparing(Arc::getEnd).compare(o1, o2);
+        }
     }
 
 }
