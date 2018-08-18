@@ -33,12 +33,15 @@ class GreedyBestFirstSearch {
             final Path path = new Path();
             final int i = node.getStored();
             path.add(i,0);
+
             while(path.size()<parser.getSize()){
                 final Node<Integer> n = new Node<>(path.getLast());
                 final HashSet<Arc<Integer>> arcs = parser.getGraph().startingAt(n);
                 boolean added = false;
+
                 while(!added){
                     final Arc<Integer> arc = Collections.min(arcs);
+
                     if(!path.contains(arc.getEnd().getStored())){
                         path.add(arc.getEnd().getStored(),arc.getWeight());
                         added = true;
@@ -47,22 +50,20 @@ class GreedyBestFirstSearch {
                         arcs.remove(arc);
                     }
                 }
-
             }
+
             final Node<Integer> n = new Node<>(path.getLast());
             final HashSet<Arc<Integer>> arcs = parser.getGraph().startingAt(n);
+
             for(final Arc<Integer> arc : arcs){
                 if(arc.isEnd(node)){
                     path.add(i, arc.getWeight());
                 }
             }
+
             paths.add(path);
         }
-        try{
-            Writer.writeToFile(parser.getName(), parser.getSize(), Collections.min(paths));
-        }
-        catch(final IOException e){
-            System.out.println("Couldn't write file for some reason.");
-        }
+
+        Writer.writeToFile(parser.getName(), parser.getSize(), Collections.min(paths));
     }
 }
