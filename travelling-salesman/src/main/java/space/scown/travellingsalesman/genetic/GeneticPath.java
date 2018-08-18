@@ -33,7 +33,7 @@ public class GeneticPath extends Path {
         this.length = path.getLength();
     }
 
-    private void setPath(final ArrayList<Integer> path) {
+    private void setPath(final List<Integer> path) {
         this.path = path;
         length = recomputeLength();
     }
@@ -118,7 +118,7 @@ public class GeneticPath extends Path {
 
     public GeneticPath swap(final int i, final int j) {
         final GeneticPath newPath = new GeneticPath(this);
-        final ArrayList<Integer> p = newPath.getPath();
+        final List<Integer> p = newPath.getPath();
         final int a = p.get(i);
         p.set(i, p.get(j));
         p.set(j, a);
