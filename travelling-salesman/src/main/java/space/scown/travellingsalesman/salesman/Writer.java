@@ -10,32 +10,34 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Writer {
-	
-	public static void writeToFile(final String name, final int size, final Path path) throws IOException{
-		final BufferedWriter writer = new BufferedWriter(new FileWriter("tour"+name+".txt"));
-		
-		final String line1 = "NAME = "+ name+ ",";
-		writer.write(line1);
-		writer.newLine();
-		
-		final String line2 = "TOURSIZE = "+size+",";
-		writer.write(line2);
-		writer.newLine();
-		
-		final int length = path.getLength();
-		final String line3 = "LENGTH = "+length+",";
-		writer.write(line3);
-		writer.newLine();
-		
-		final List<Integer> cities = path.getPath();
-		String line4 = "";
-		for(int i = 0;i<cities.size()-2;i++){
-			line4+=cities.get(i)+",";
-		}
-		line4+=cities.get(cities.size()-2);
-		writer.write(line4);
-		writer.close();
-	}
+
+    public static void writeToFile(final String name, final int size, final Path path) throws IOException {
+        try (final BufferedWriter writer = new BufferedWriter(new FileWriter("tour" + name + ".txt"))) {
+            final String line1 = "NAME = " + name + ",";
+            writer.write(line1);
+            writer.newLine();
+
+            final String line2 = "TOURSIZE = " + size + ",";
+            writer.write(line2);
+            writer.newLine();
+
+            final int length = path.getLength();
+            final String line3 = "LENGTH = " + length + ",";
+            writer.write(line3);
+            writer.newLine();
+
+
+            final List<Integer> cities = path.getPath();
+
+            final String line4 = cities.stream()
+                    .map(Object::toString)
+                    .limit(cities.size() - 1)
+                    .collect(Collectors.joining(","));
+
+            writer.write(line4);
+        }
+    }
 }
