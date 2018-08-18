@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
 
-public class GreedyBestFirstSearch {
+class GreedyBestFirstSearch {
 	
 	/**
 	 * A greedy best first search algorithm.  From each city,
@@ -25,7 +25,7 @@ public class GreedyBestFirstSearch {
 	 * @param args Input filename
 	 */
 	public static void main(String[] args){
-		Parser parser = null;
+		Parser parser;
 		try{
 			parser = new Parser(args[0]);
 		}

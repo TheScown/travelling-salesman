@@ -9,9 +9,9 @@ package space.scown.travellingsalesman.graph;
 
 public class Arc<T> implements Comparable<Arc<T>>{
 		
-		private Node<T> start;
-		private Node<T> end;
-		int weight;
+		private final Node<T> start;
+		private final Node<T> end;
+		private final int weight;
 		
 		public Arc(Node<T> start, Node<T> end, int weight){
 			this.start = start;

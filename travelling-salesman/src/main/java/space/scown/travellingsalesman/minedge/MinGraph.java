@@ -13,7 +13,7 @@ import space.scown.travellingsalesman.graph.Node;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class MinGraph<T> extends Graph<T> {
+class MinGraph<T> extends Graph<T> {
 
 	public MinGraph(HashSet<Node<T>> nodes, HashSet<Arc<T>> arcs) {
 		super(nodes,arcs);

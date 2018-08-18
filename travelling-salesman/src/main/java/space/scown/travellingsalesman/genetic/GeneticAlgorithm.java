@@ -20,13 +20,9 @@ public class GeneticAlgorithm {
 	private static final int POPULATION_SIZE = 10;
 	private static final double MUTATION_CHANCE = 0.1;
 	private static final int GENERATIONS = 10;
-	
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		Parser parser = null;
+		Parser parser;
 		try{
 			parser = new Parser(args[0]);
 		}

@@ -8,7 +8,7 @@ package space.scown.travellingsalesman.graph;
 
 public class Node<T>{
 		
-	private T stored;
+	private final T stored;
 		
 	public Node(T object){
 		stored = object;

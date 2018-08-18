@@ -18,13 +18,13 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class MinimumEdgeSearch {
+class MinimumEdgeSearch {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Parser parser = null;
+		Parser parser;
 		try{
 			parser = new Parser(args[0]);
 		}

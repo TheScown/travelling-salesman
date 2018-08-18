@@ -12,11 +12,11 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Runner {
+class Runner {
 	
 	//public static final String prefix = "Batch 1/";
 
-	public static final String[] files = 
+	private static final String[] files =
 		{"file12",
 		"file17",
 		"file21",

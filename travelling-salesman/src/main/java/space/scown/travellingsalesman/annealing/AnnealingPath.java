@@ -15,9 +15,9 @@ import java.util.Random;
 
 public class AnnealingPath extends space.scown.travellingsalesman.salesman.Path {
 
-	private Parser parser;
+	private final Parser parser;
 	
-	public AnnealingPath(String name, Parser parser){
+	private AnnealingPath(Parser parser){
 		super();
 		this.parser = parser;
 	}
@@ -28,20 +28,7 @@ public class AnnealingPath extends space.scown.travellingsalesman.salesman.Path 
 		this.path = new ArrayList<Integer>(path.getPath());
 		this.length = path.getLength();
 	}
-	
-	public HashSet<AnnealingPath> successors(){
-		HashSet<AnnealingPath> successors = new HashSet<AnnealingPath>();
-		for(int i = 0;i<size()-1;i++){
-			for(int j = i;j<size()-1;j++){
-				if(i!=j){
-					AnnealingPath newPath = this.swap(i,j);
-					successors.add(newPath);
-				}
-			}
-		}
-		return successors;
-	}
-	
+
 	private Parser getParser(){
 		return parser;
 	}
@@ -52,7 +39,7 @@ public class AnnealingPath extends space.scown.travellingsalesman.salesman.Path 
 		int a = p.get(i);
 		p.set(i,p.get(j));
 		p.set(j,a);
-		if(p.get(0) != p.get(p.size()-1)){
+		if(!p.get(0).equals(p.get(p.size() - 1))){
 			p.set(size()-1,p.get(0));
 		}
 		newPath.path = p;
@@ -65,13 +52,13 @@ public class AnnealingPath extends space.scown.travellingsalesman.salesman.Path 
 		for(int i = 0;i<size()-1;i++){
 			Node<Integer> start = new Node<Integer>(path.get(i));
 			Node<Integer> end = new Node<Integer>(path.get(i+1));
-			newLength = newLength += parser.getGraph().distance(start, end);
+			newLength = parser.getGraph().distance(start, end);
 		}
 		return newLength;
 	}
 	
 	public static AnnealingPath generateRandomPath(Parser parser) {
-		AnnealingPath path = new AnnealingPath(parser.getName(),parser);
+		AnnealingPath path = new AnnealingPath(parser);
 		HashSet<Node<Integer>> nodes = parser.getGraph().getNodes();
 		int size = nodes.size();
 		Random randomGen = new Random();

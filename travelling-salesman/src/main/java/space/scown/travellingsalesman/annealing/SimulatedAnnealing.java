@@ -18,7 +18,7 @@ import java.util.Random;
 //import java.util.Iterator;
 //import java.util.Collections;
 
-public class SimulatedAnnealing {
+class SimulatedAnnealing {
 
 	/**
 	 * A simulated space.scown.travellingsalesman.annealing algorithm
@@ -26,7 +26,7 @@ public class SimulatedAnnealing {
 	 * @param args Input filename
 	 */
 	public static void main(String[] args) {
-		Parser parser = null;
+		Parser parser;
 		try{
 			parser = new Parser(args[0]);
 		}

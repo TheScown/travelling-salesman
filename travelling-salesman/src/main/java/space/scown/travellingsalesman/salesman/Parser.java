@@ -12,6 +12,7 @@ import space.scown.travellingsalesman.graph.Node;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Collections;
 import java.util.HashSet;
 
 public class Parser {
@@ -46,9 +47,7 @@ public class Parser {
 		for(int i = 0;i<size;i++){
 			nodeArray[i] = new Node<Integer>(i+1);
 		}
-		for(Node<Integer> node : nodeArray){
-			nodes.add(node);
-		}
+        Collections.addAll(nodes, nodeArray);
 		
 		HashSet<Arc<Integer>> arcs = new HashSet<Arc<Integer>>();
 		int j = 2;

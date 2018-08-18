@@ -9,8 +9,8 @@ import java.util.HashSet;
 
 public class Graph<T> {
 
-	protected HashSet<Node<T>> nodes;
-	protected HashSet<Arc<T>> arcs;	
+	private final HashSet<Node<T>> nodes;
+	protected final HashSet<Arc<T>> arcs;
 
 	public Graph(HashSet<Node<T>> nodes, HashSet<Arc<T>> arcs){
 		this.nodes = nodes;
@@ -25,7 +25,7 @@ public class Graph<T> {
 		return arcs;
 	}
 	
-	public HashSet<Node<T>>successors(Node<T> node){
+	protected HashSet<Node<T>>successors(Node<T> node){
 		HashSet<Node<T>> successors = new HashSet<Node<T>>();
 		for(Arc<T> arc : arcs){
 			if(arc.isStart(node)){
@@ -34,17 +34,7 @@ public class Graph<T> {
 		}
 		return successors;
 	}
-	
-	public HashSet<Node<T>>predecessors(Node<T> node){
-		HashSet<Node<T>> predecessors = new HashSet<Node<T>>();
-		for(Arc<T> arc : arcs){
-			if(arc.isEnd(node)){
-				predecessors.add(arc.getStart());
-			}
-		}
-		return predecessors;
-	}
-	
+
 	public HashSet<Arc<T>> startingAt(Node<T> node){
 		HashSet<Arc<T>> startingAt = new HashSet<Arc<T>>();
 		for(Arc<T> arc : arcs){
@@ -64,27 +54,11 @@ public class Graph<T> {
 		}
 		return endingAt;
 	}
-	
-	public boolean contains(Node<T> node){
-		return nodes.contains(node);
-	}
-	
-	public boolean contains(Arc<T> arc){
-		return arcs.contains(arc);
-	}
-	
-	public boolean succeeds(Node<T> n1, Node<T>n2){
+
+	private boolean succeeds(Node<T> n1, Node<T> n2){
 		return successors(n1).contains(n2);
 	}
-	
-	public boolean precedes(Node<T> n1, Node<T> n2){
-		return predecessors(n1).contains(n2);
-	}
-	
-	public boolean adjacent(Node<T> n1, Node<T> n2){
-		return succeeds(n1,n2) || precedes(n1,n2);
-	}
-	
+
 	public int distance(Node<T> n1, Node<T> n2)throws IllegalArgumentException{
 		if(succeeds(n1,n2)){
 			HashSet<Arc<T>> arcs = startingAt(n1);

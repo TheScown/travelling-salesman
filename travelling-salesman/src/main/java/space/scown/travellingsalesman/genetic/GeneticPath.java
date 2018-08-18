@@ -17,9 +17,9 @@ import java.util.Random;
 
 public class GeneticPath extends Path {
 	
-	private Parser parser;
+	private final Parser parser;
 	
-	public GeneticPath(Parser parser){
+	private GeneticPath(Parser parser){
 		super();
 		this.parser = parser;
 	}
@@ -36,7 +36,7 @@ public class GeneticPath extends Path {
 		length = recomputeLength();
 	}
 	
-	public Parser getParser(){
+	private Parser getParser(){
 		return parser;
 	}
 
@@ -96,9 +96,9 @@ public class GeneticPath extends Path {
 		ArrayList<Integer> doubled = new ArrayList<Integer>();
 		for(int i = 1;i<=p.size();i++){
 			int count = 0;
-			for(int j = 0;j<p.size();j++){
-				if(p.get(j) == i){
-					count ++;
+			for (Integer aP : p) {
+				if (aP == i) {
+					count++;
 				}
 			}
 			if(count == 0){
@@ -121,7 +121,7 @@ public class GeneticPath extends Path {
 		int a = p.get(i);
 		p.set(i,p.get(j));
 		p.set(j,a);
-		if(p.get(0) != p.get(p.size()-1)){
+		if(!p.get(0).equals(p.get(p.size() - 1))){
 			p.set(size()-1,p.get(0));
 		}
 		newPath.setPath(p);
@@ -133,7 +133,7 @@ public class GeneticPath extends Path {
 		for(int i = 0;i<size()-1;i++){
 			Node<Integer> start = new Node<Integer>(path.get(i));
 			Node<Integer> end = new Node<Integer>(path.get(i+1));
-			newLength = newLength += parser.getGraph().distance(start, end);
+			newLength = parser.getGraph().distance(start, end);
 		}
 		return newLength;
 	}
