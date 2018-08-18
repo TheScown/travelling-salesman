@@ -25,15 +25,9 @@ public class SimulatedAnnealing {
 	 * 
 	 * @param args Input filename
 	 */
-	public static void main(final String[] args) {
-		final Parser parser;
-		try{
-			parser = new Parser(args[0]);
-		}
-		catch(final Exception e){
-			System.out.println("Some sort of error occurred.  Check the file was formatted correctly");
-			return;
-		}
+	public static void main(final String[] args) throws IOException {
+		final Parser parser = new Parser(args[0]);
+
 		final int[] temperatures = new int[200];
 		for(int i = 0;i<200;i++){
 			temperatures[i] = 199-20*i;
@@ -47,12 +41,8 @@ public class SimulatedAnnealing {
 		AnnealingPath current = AnnealingPath.generateRandomPath(parser);
 		for(int t = 0;t<200;t++){
 			if(temperatures[t] == 0){
-				try {
-					Writer.writeToFile(parser.getName(), parser.getSize(), current);
-					return;
-				} catch (final IOException e) {
-					System.out.println("Error writing file.");
-				}
+				Writer.writeToFile(parser.getName(), parser.getSize(), current);
+				return;
 			}
 			else{
 				final Random numberGenerator = new Random();

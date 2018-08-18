@@ -9,6 +9,7 @@ package space.scown.travellingsalesman.genetic;
 import space.scown.travellingsalesman.salesman.Parser;
 import space.scown.travellingsalesman.salesman.Writer;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,15 +23,9 @@ public class GeneticAlgorithm {
 	private static final double MUTATION_CHANCE = 0.1;
 	private static final int GENERATIONS = 10;
 
-	public static void main(final String[] args) {
-		final Parser parser;
-		try{
-			parser = new Parser(args[0]);
-		}
-		catch(final Exception e){
-			System.out.println("Some sort of error occurred.  Check the file was formatted correctly");
-			return;
-		}
+	public static void main(final String[] args) throws IOException {
+		final Parser parser = new Parser(args[0]);
+
 		List<GeneticPath> population = new ArrayList<>();
 		for(int i = 0;i<POPULATION_SIZE;i++){
 			population.add(GeneticPath.generateRandomPath(parser));
@@ -58,12 +53,8 @@ public class GeneticAlgorithm {
 			population = newPopulation;
 			finalPath = Collections.min(population);
 		}
-		try{
-			Writer.writeToFile(parser.getName(),parser.getSize(),finalPath);
-		}
-		catch(final Exception e){
-			System.out.println("An error occurred writing the file.");
-		}
+
+        Writer.writeToFile(parser.getName(),parser.getSize(),finalPath);
 	}
 	
 	private static GeneticPath getRandomMember(final List<GeneticPath> population){
