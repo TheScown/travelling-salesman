@@ -13,7 +13,7 @@ public class Arc<T> implements Comparable<Arc<T>>{
 		private final Node<T> end;
 		private final int weight;
 		
-		public Arc(Node<T> start, Node<T> end, int weight){
+		public Arc(final Node<T> start, final Node<T> end, final int weight){
 			this.start = start;
 			this.end = end;
 			this.weight = weight;
@@ -31,18 +31,18 @@ public class Arc<T> implements Comparable<Arc<T>>{
 			return weight;
 		}
 		
-		public boolean isStart(Node<T> n){
+		public boolean isStart(final Node<T> n){
 			return start.equals(n);
 		}
 		
-		public boolean isEnd(Node<T> n){
+		public boolean isEnd(final Node<T> n){
 			return end.equals(n);
 		}
 		
 		@SuppressWarnings("unchecked")
-		public boolean equals(Object o){
+		public boolean equals(final Object o){
 			if(getClass().equals(o.getClass())){
-				Arc<T> a = (Arc<T>) o;
+				final Arc<T> a = (Arc<T>) o;
 				return (start.equals(a.getStart())&&end.equals(a.getEnd())&&weight==a.getWeight());
 			}
 			return false;
@@ -56,7 +56,7 @@ public class Arc<T> implements Comparable<Arc<T>>{
 			return "("+start.toString()+","+end.toString()+","+weight+")";
 		}
 		
-		public int compareTo(Arc<T> o){
+		public int compareTo(final Arc<T> o){
 			return weight - o.getWeight();
 		}
 

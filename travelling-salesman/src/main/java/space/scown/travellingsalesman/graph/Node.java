@@ -10,7 +10,7 @@ public class Node<T>{
 		
 	private final T stored;
 		
-	public Node(T object){
+	public Node(final T object){
 		stored = object;
 	}
 		
@@ -19,9 +19,9 @@ public class Node<T>{
 	}
 		
 	@SuppressWarnings("unchecked")
-	public boolean equals(Object o){
+	public boolean equals(final Object o){
 		if(o.getClass().equals(this.getClass())){
-			Node<T> n = (Node<T>) o;
+			final Node<T> n = (Node<T>) o;
 			return stored.equals(n.getStored());
 		}
 		return false;

@@ -12,7 +12,7 @@ public class Graph<T> {
 	private final HashSet<Node<T>> nodes;
 	protected final HashSet<Arc<T>> arcs;
 
-	public Graph(HashSet<Node<T>> nodes, HashSet<Arc<T>> arcs){
+	public Graph(final HashSet<Node<T>> nodes, final HashSet<Arc<T>> arcs){
 		this.nodes = nodes;
 		this.arcs = arcs;
 	}
@@ -25,9 +25,9 @@ public class Graph<T> {
 		return arcs;
 	}
 	
-	protected HashSet<Node<T>>successors(Node<T> node){
-		HashSet<Node<T>> successors = new HashSet<Node<T>>();
-		for(Arc<T> arc : arcs){
+	protected HashSet<Node<T>>successors(final Node<T> node){
+		final HashSet<Node<T>> successors = new HashSet<Node<T>>();
+		for(final Arc<T> arc : arcs){
 			if(arc.isStart(node)){
 				successors.add(arc.getEnd());
 			}
@@ -35,9 +35,9 @@ public class Graph<T> {
 		return successors;
 	}
 
-	public HashSet<Arc<T>> startingAt(Node<T> node){
-		HashSet<Arc<T>> startingAt = new HashSet<Arc<T>>();
-		for(Arc<T> arc : arcs){
+	public HashSet<Arc<T>> startingAt(final Node<T> node){
+		final HashSet<Arc<T>> startingAt = new HashSet<Arc<T>>();
+		for(final Arc<T> arc : arcs){
 			if(arc.isStart(node)){
 				startingAt.add(arc);
 			}
@@ -45,9 +45,9 @@ public class Graph<T> {
 		return startingAt;
 	}
 	
-	public HashSet<Arc<T>> endingAt(Node<T> node){
-		HashSet<Arc<T>> endingAt = new HashSet<Arc<T>>();
-		for(Arc<T> arc : arcs){
+	public HashSet<Arc<T>> endingAt(final Node<T> node){
+		final HashSet<Arc<T>> endingAt = new HashSet<Arc<T>>();
+		for(final Arc<T> arc : arcs){
 			if(arc.isEnd(node)){
 				endingAt.add(arc);
 			}
@@ -55,15 +55,15 @@ public class Graph<T> {
 		return endingAt;
 	}
 
-	private boolean succeeds(Node<T> n1, Node<T> n2){
+	private boolean succeeds(final Node<T> n1, final Node<T> n2){
 		return successors(n1).contains(n2);
 	}
 
-	public int distance(Node<T> n1, Node<T> n2)throws IllegalArgumentException{
+	public int distance(final Node<T> n1, final Node<T> n2)throws IllegalArgumentException{
 		if(succeeds(n1,n2)){
-			HashSet<Arc<T>> arcs = startingAt(n1);
+			final HashSet<Arc<T>> arcs = startingAt(n1);
 			int distance = 0;
-			for(Arc<T> arc : arcs){
+			for(final Arc<T> arc : arcs){
 				if(arc.isEnd(n2)){
 					distance = arc.getWeight();
 				}

@@ -17,12 +17,12 @@ public class AnnealingPath extends space.scown.travellingsalesman.salesman.Path 
 
 	private final Parser parser;
 	
-	private AnnealingPath(Parser parser){
+	private AnnealingPath(final Parser parser){
 		super();
 		this.parser = parser;
 	}
 	
-	private AnnealingPath(AnnealingPath path){
+	private AnnealingPath(final AnnealingPath path){
 		super();
 		this.parser = path.getParser();
 		this.path = new ArrayList<Integer>(path.getPath());
@@ -33,10 +33,10 @@ public class AnnealingPath extends space.scown.travellingsalesman.salesman.Path 
 		return parser;
 	}
 	
-	public AnnealingPath swap(int i,int j){
-		AnnealingPath newPath = new AnnealingPath(this);
-		ArrayList<Integer> p = new ArrayList<Integer>(newPath.getPath());
-		int a = p.get(i);
+	public AnnealingPath swap(final int i, final int j){
+		final AnnealingPath newPath = new AnnealingPath(this);
+		final ArrayList<Integer> p = new ArrayList<Integer>(newPath.getPath());
+		final int a = p.get(i);
 		p.set(i,p.get(j));
 		p.set(j,a);
 		if(!p.get(0).equals(p.get(p.size() - 1))){
@@ -50,31 +50,31 @@ public class AnnealingPath extends space.scown.travellingsalesman.salesman.Path 
 	private int recomputeLength(){
 		int newLength = 0;
 		for(int i = 0;i<size()-1;i++){
-			Node<Integer> start = new Node<Integer>(path.get(i));
-			Node<Integer> end = new Node<Integer>(path.get(i+1));
+			final Node<Integer> start = new Node<Integer>(path.get(i));
+			final Node<Integer> end = new Node<Integer>(path.get(i+1));
 			newLength = parser.getGraph().distance(start, end);
 		}
 		return newLength;
 	}
 	
-	public static AnnealingPath generateRandomPath(Parser parser) {
-		AnnealingPath path = new AnnealingPath(parser);
-		HashSet<Node<Integer>> nodes = parser.getGraph().getNodes();
-		int size = nodes.size();
-		Random randomGen = new Random();
-		int start = randomGen.nextInt(size) + 1;
+	public static AnnealingPath generateRandomPath(final Parser parser) {
+		final AnnealingPath path = new AnnealingPath(parser);
+		final HashSet<Node<Integer>> nodes = parser.getGraph().getNodes();
+		final int size = nodes.size();
+		final Random randomGen = new Random();
+		final int start = randomGen.nextInt(size) + 1;
 		path.add(start,0);
 		while(path.size() < size){
-			int next = randomGen.nextInt(size) + 1;
+			final int next = randomGen.nextInt(size) + 1;
 			if(!path.contains(next)){
-				Node<Integer> n1 = new Node<Integer>(path.getLast());
-				Node<Integer> n2 = new Node<Integer>(next);
-				int distance = parser.getGraph().distance(n1, n2);
+				final Node<Integer> n1 = new Node<Integer>(path.getLast());
+				final Node<Integer> n2 = new Node<Integer>(next);
+				final int distance = parser.getGraph().distance(n1, n2);
 				path.add(next,distance);
 			}
 		}
-		Node<Integer> n1 = new Node<Integer>(start);
-		Node<Integer> n2 = new Node<Integer>(path.getLast());
+		final Node<Integer> n1 = new Node<Integer>(start);
+		final Node<Integer> n2 = new Node<Integer>(path.getLast());
 		path.add(start, parser.getGraph().distance(n1,n2));
 		return path;
 	}

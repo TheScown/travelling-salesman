@@ -18,43 +18,43 @@ import java.util.HashSet;
 
 public class Parser {
 	
-	private String name;
-	private int size;
-	private Graph<Integer> graph;
+	private final String name;
+	private final int size;
+	private final Graph<Integer> graph;
 	
 	@SuppressWarnings("unchecked")
-	public Parser(String filename) throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader(filename));
+	public Parser(final String filename) throws IOException {
+		final BufferedReader reader = new BufferedReader(new FileReader(filename));
 		String line = reader.readLine();
 		String data = "";
 		while(line != null){
 			data+=line;
 			line = reader.readLine();
 		}
-		String[] parts = data.split(",");
+		final String[] parts = data.split(",");
 		for(int i = 0;i<parts.length;i++){
 			parts[i] = parts[i].trim();
 		}
 		
-		String[] nameParts = parts[0].split("=");
+		final String[] nameParts = parts[0].split("=");
 		name = nameParts[1].trim();
 		
-		String[] sizeParts = parts[1].split("=");
-		String sizeString = sizeParts[1].trim();
+		final String[] sizeParts = parts[1].split("=");
+		final String sizeString = sizeParts[1].trim();
 		size = Integer.parseInt(sizeString);
 		
-		HashSet<Node<Integer>> nodes = new HashSet<Node<Integer>>();
-		Node<Integer>[] nodeArray = new Node[size];
+		final HashSet<Node<Integer>> nodes = new HashSet<Node<Integer>>();
+		final Node<Integer>[] nodeArray = new Node[size];
 		for(int i = 0;i<size;i++){
 			nodeArray[i] = new Node<Integer>(i+1);
 		}
         Collections.addAll(nodes, nodeArray);
 		
-		HashSet<Arc<Integer>> arcs = new HashSet<Arc<Integer>>();
+		final HashSet<Arc<Integer>> arcs = new HashSet<Arc<Integer>>();
 		int j = 2;
 		for(int k = 0;k<size;k++){
 			for(int l = k+1;l<size;l++){
-				int weight = Integer.parseInt(parts[j]);
+				final int weight = Integer.parseInt(parts[j]);
 				arcs.add(new Arc<Integer>(nodeArray[k],nodeArray[l],weight));
 				arcs.add(new Arc<Integer>(nodeArray[l],nodeArray[k],weight));
 				j++;

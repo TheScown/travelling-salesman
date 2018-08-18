@@ -15,23 +15,23 @@ import java.util.Iterator;
 
 class MinGraph<T> extends Graph<T> {
 
-	public MinGraph(HashSet<Node<T>> nodes, HashSet<Arc<T>> arcs) {
+	public MinGraph(final HashSet<Node<T>> nodes, final HashSet<Arc<T>> arcs) {
 		super(nodes,arcs);
 	}
 	
-	public void addArc(Arc<T> arc) {
+	public void addArc(final Arc<T> arc) {
 		arcs.add(arc);
 	}
 	
-	public Node<T> getNextCity(Node<T> city) {
-		HashSet<Node<T>> nextNode = successors(city);
-		Iterator<Node<T>> it = nextNode.iterator();
+	public Node<T> getNextCity(final Node<T> city) {
+		final HashSet<Node<T>> nextNode = successors(city);
+		final Iterator<Node<T>> it = nextNode.iterator();
 		return it.next();
 	}
 	
-	public Arc<T> getNextLeg(Node<T> city) {
-		HashSet<Arc<T>> nextLeg = startingAt(city);
-		Iterator<Arc<T>>it = nextLeg.iterator();
+	public Arc<T> getNextLeg(final Node<T> city) {
+		final HashSet<Arc<T>> nextLeg = startingAt(city);
+		final Iterator<Arc<T>>it = nextLeg.iterator();
 		return it.next();
 	}
 }

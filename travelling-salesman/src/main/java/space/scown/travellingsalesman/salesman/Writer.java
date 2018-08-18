@@ -13,23 +13,23 @@ import java.util.ArrayList;
 
 public class Writer {
 	
-	public static void writeToFile(String name, int size, Path path) throws IOException{
-		BufferedWriter writer = new BufferedWriter(new FileWriter("tour"+name+".txt"));
+	public static void writeToFile(final String name, final int size, final Path path) throws IOException{
+		final BufferedWriter writer = new BufferedWriter(new FileWriter("tour"+name+".txt"));
 		
-		String line1 = "NAME = "+ name+ ",";
+		final String line1 = "NAME = "+ name+ ",";
 		writer.write(line1);
 		writer.newLine();
 		
-		String line2 = "TOURSIZE = "+size+",";
+		final String line2 = "TOURSIZE = "+size+",";
 		writer.write(line2);
 		writer.newLine();
 		
-		int length = path.getLength();
-		String line3 = "LENGTH = "+length+",";
+		final int length = path.getLength();
+		final String line3 = "LENGTH = "+length+",";
 		writer.write(line3);
 		writer.newLine();
 		
-		ArrayList<Integer> cities = path.getPath();
+		final ArrayList<Integer> cities = path.getPath();
 		String line4 = "";
 		for(int i = 0;i<cities.size()-2;i++){
 			line4+=cities.get(i)+",";

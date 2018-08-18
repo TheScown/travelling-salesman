@@ -23,44 +23,44 @@ class MinimumEdgeSearch {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		Parser parser;
+	public static void main(final String[] args) {
+		final Parser parser;
 		try{
 			parser = new Parser(args[0]);
 		}
-		catch(Exception e){
+		catch(final Exception e){
 			System.out.println("Some sort of error occurred.  Check the file was formatted correctly");
 			return;
 		}
 		
-		Graph<Integer> graph = parser.getGraph();
-		HashSet<Arc<Integer>> arcs = graph.getArcs();
-		MinGraph<Integer> minGraph = new MinGraph<Integer>(graph.getNodes(), new HashSet<Arc<Integer>>());
-		while(arcs.size() != 0) {
-			Arc<Integer> min = Collections.min(arcs);
+		final Graph<Integer> graph = parser.getGraph();
+		final HashSet<Arc<Integer>> arcs = graph.getArcs();
+		final MinGraph<Integer> minGraph = new MinGraph<Integer>(graph.getNodes(), new HashSet<Arc<Integer>>());
+		while(!arcs.isEmpty()) {
+			final Arc<Integer> min = Collections.min(arcs);
 			arcs.remove(min);
 			
-			Node<Integer> minStart = min.getStart();
-			Node<Integer> minEnd = min.getEnd();
+			final Node<Integer> minStart = min.getStart();
+			final Node<Integer> minEnd = min.getEnd();
 			
 			arcs.remove(new Arc<Integer>(minEnd,minStart,min.getWeight()));
 			
-			Iterator<Arc<Integer>> it = arcs.iterator();
+			final Iterator<Arc<Integer>> it = arcs.iterator();
 			while(it.hasNext()){
-				Arc<Integer> a = it.next();
+				final Arc<Integer> a = it.next();
 				if(a.getStart().equals(minStart) || a.getEnd().equals(minEnd)) {
 					it.remove();
 				}
 			}
 			
 			
-			if((minGraph.startingAt(minStart).size() == 0) && (minGraph.endingAt(minEnd).size() == 0)) {
+			if((minGraph.startingAt(minStart).isEmpty()) && (minGraph.endingAt(minEnd).isEmpty())) {
 				minGraph.addArc(min);
 			}
 		}
 		
-		Path path = new Path();
-		Node<Integer> startNode = new Node<Integer>(1);
+		final Path path = new Path();
+		final Node<Integer> startNode = new Node<Integer>(1);
 		Arc<Integer> leg = minGraph.getNextLeg(startNode);
 		path.add(startNode.getStored(),leg.getWeight());
 		
@@ -76,7 +76,7 @@ class MinimumEdgeSearch {
 		try {
 			Writer.writeToFile(parser.getName(), parser.getSize(), path);
 		} 
-		catch (IOException e) {
+		catch (final IOException e) {
 			System.out.println("Couldn't write file for some reason.");
 		}
 	}

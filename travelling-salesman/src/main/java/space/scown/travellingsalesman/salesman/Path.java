@@ -17,7 +17,7 @@ public class Path implements Comparable<Path>{
 		path = new ArrayList<Integer>();
 	}
 	
-	public void add(int city, int lengthIncrease){
+	public void add(final int city, final int lengthIncrease){
 		path.add(city);
 		length+=lengthIncrease;
 	}
@@ -30,13 +30,13 @@ public class Path implements Comparable<Path>{
 		return path;
 	}
 	
-	public boolean contains(Integer i){
+	public boolean contains(final Integer i){
 		return path.contains(i);
 	}
 	
-	public boolean equals(Object o){
+	public boolean equals(final Object o){
 		if (o instanceof Path){
-			Path p = (Path) o;
+			final Path p = (Path) o;
 			return path.equals(p.getPath())&&length==p.getLength();
 		}
 		return false;
@@ -52,7 +52,7 @@ public class Path implements Comparable<Path>{
 	
 	public String toString(){
 		String s = "(";
-		for(int i: path){
+		for(final int i: path){
 			s+=i+",";
 		}
 		s+=length+")";
@@ -65,7 +65,7 @@ public class Path implements Comparable<Path>{
 		return path.hashCode()+length;
 	}
 
-	public int compareTo(Path o) {
+	public int compareTo(final Path o) {
 		return length - o.getLength();
 	}
 }

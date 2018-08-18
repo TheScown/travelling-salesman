@@ -31,13 +31,13 @@ class Runner {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) throws IOException{
-		BufferedWriter writer = new BufferedWriter(new FileWriter("times.txt"));
-		for(String filename : files){
+	public static void main(final String[] args) throws IOException{
+		final BufferedWriter writer = new BufferedWriter(new FileWriter("times.txt"));
+		for(final String filename : files){
 			writer.write(filename);
 			writer.newLine();
 			
-			String[] string = new String[1];
+			final String[] string = new String[1];
 			/*string[0] = filename.concat("a.txt");
 			long greedyStartTime = System.currentTimeMillis();
 			GreedyBestFirstSearch.main(string);
@@ -54,9 +54,9 @@ class Runner {
 			writer.newLine();*/
 			
 			string[0] = filename.concat("c.txt");
-			long geneticStartTime = System.currentTimeMillis();
+			final long geneticStartTime = System.currentTimeMillis();
 			GeneticAlgorithm.main(string);
-			long geneticEndTime = System.currentTimeMillis();
+			final long geneticEndTime = System.currentTimeMillis();
 			writer.write("Genetic: "+((geneticEndTime - geneticStartTime)/1000));
 			writer.newLine();
 			

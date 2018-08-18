@@ -25,16 +25,16 @@ class SimulatedAnnealing {
 	 * 
 	 * @param args Input filename
 	 */
-	public static void main(String[] args) {
-		Parser parser;
+	public static void main(final String[] args) {
+		final Parser parser;
 		try{
 			parser = new Parser(args[0]);
 		}
-		catch(Exception e){
+		catch(final Exception e){
 			System.out.println("Some sort of error occurred.  Check the file was formatted correctly");
 			return;
 		}
-		int[] temperatures = new int[200];
+		final int[] temperatures = new int[200];
 		for(int i = 0;i<200;i++){
 			temperatures[i] = 199-20*i;
 			if(i>9){
@@ -50,18 +50,18 @@ class SimulatedAnnealing {
 				try {
 					Writer.writeToFile(parser.getName(), parser.getSize(), current);
 					return;
-				} catch (IOException e) {
+				} catch (final IOException e) {
 					System.out.println("Error writing file.");
 				}
 			}
 			else{
-				Random numberGenerator = new Random();
+				final Random numberGenerator = new Random();
 				//HashSet<AnnealingPath> successors = current.successors();
-				int successors = (parser.getSize())*parser.getSize();
-				int randomSuccessor = numberGenerator.nextInt(successors);
-				int i = (randomSuccessor-randomSuccessor%parser.getSize())/parser.getSize();
-				int j = randomSuccessor%parser.getSize();
-				AnnealingPath newPath = current.swap(i,j);
+				final int successors = (parser.getSize())*parser.getSize();
+				final int randomSuccessor = numberGenerator.nextInt(successors);
+				final int i = (randomSuccessor-randomSuccessor%parser.getSize())/parser.getSize();
+				final int j = randomSuccessor%parser.getSize();
+				final AnnealingPath newPath = current.swap(i,j);
 				/*int randomSuccessor = numberGenerator.nextInt(successors.size()-1) + 1;
 				//AnnealingPath newPath = Collections.min(successors);
 				/AnnealingPath newPath = null;
@@ -69,10 +69,10 @@ class SimulatedAnnealing {
 				for(int i = 0;i<randomSuccessor;i++){
 					newPath = it.next();
 				}*/
-				int deltaE = current.getLength() - newPath.getLength();
+				final int deltaE = current.getLength() - newPath.getLength();
 				//System.out.println(deltaE);
-				int temp = temperatures[t];
-				double d = (double) Math.abs(deltaE)/(double)temp;
+				final int temp = temperatures[t];
+				final double d = (double) Math.abs(deltaE)/(double)temp;
 				//System.out.println(d);
 				if(deltaE > 0){
 					current = newPath;

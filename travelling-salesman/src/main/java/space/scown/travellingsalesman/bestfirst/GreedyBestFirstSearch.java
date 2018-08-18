@@ -24,20 +24,20 @@ class GreedyBestFirstSearch {
      * Returns the shortest tour in a file.
      * @param args Input filename
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(final String[] args) throws IOException {
         final Parser parser = new Parser(args[0]);
 
-        HashSet<Path> paths = new HashSet<Path>();
-        for(Node<Integer> node : parser.getGraph().getNodes()){
-            Path path = new Path();
-            int i = node.getStored();
+        final HashSet<Path> paths = new HashSet<Path>();
+        for(final Node<Integer> node : parser.getGraph().getNodes()){
+            final Path path = new Path();
+            final int i = node.getStored();
             path.add(i,0);
             while(path.size()<parser.getSize()){
-                Node<Integer> n = new Node<Integer>(path.getLast());
-                HashSet<Arc<Integer>> arcs = parser.getGraph().startingAt(n);
+                final Node<Integer> n = new Node<Integer>(path.getLast());
+                final HashSet<Arc<Integer>> arcs = parser.getGraph().startingAt(n);
                 boolean added = false;
                 while(!added){
-                    Arc<Integer> arc = Collections.min(arcs);
+                    final Arc<Integer> arc = Collections.min(arcs);
                     if(!path.contains(arc.getEnd().getStored())){
                         path.add(arc.getEnd().getStored(),arc.getWeight());
                         added = true;
@@ -48,9 +48,9 @@ class GreedyBestFirstSearch {
                 }
 
             }
-            Node<Integer> n = new Node<Integer>(path.getLast());
-            HashSet<Arc<Integer>> arcs = parser.getGraph().startingAt(n);
-            for(Arc<Integer> arc : arcs){
+            final Node<Integer> n = new Node<Integer>(path.getLast());
+            final HashSet<Arc<Integer>> arcs = parser.getGraph().startingAt(n);
+            for(final Arc<Integer> arc : arcs){
                 if(arc.isEnd(node)){
                     path.add(i, arc.getWeight());
                 }
@@ -60,7 +60,7 @@ class GreedyBestFirstSearch {
         try{
             Writer.writeToFile(parser.getName(), parser.getSize(), Collections.min(paths));
         }
-        catch(IOException e){
+        catch(final IOException e){
             System.out.println("Couldn't write file for some reason.");
         }
     }

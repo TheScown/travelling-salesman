@@ -21,12 +21,12 @@ public class GeneticAlgorithm {
 	private static final double MUTATION_CHANCE = 0.1;
 	private static final int GENERATIONS = 10;
 
-	public static void main(String[] args) {
-		Parser parser;
+	public static void main(final String[] args) {
+		final Parser parser;
 		try{
 			parser = new Parser(args[0]);
 		}
-		catch(Exception e){
+		catch(final Exception e){
 			System.out.println("Some sort of error occurred.  Check the file was formatted correctly");
 			return;
 		}
@@ -36,19 +36,19 @@ public class GeneticAlgorithm {
 		}
 		GeneticPath finalPath = null;
 		for(int g = 0;g<GENERATIONS;g++){
-			ArrayList<GeneticPath> newPopulation = new ArrayList<GeneticPath>();
+			final ArrayList<GeneticPath> newPopulation = new ArrayList<GeneticPath>();
 			for(int p = 0; p<POPULATION_SIZE;p++){
-				GeneticPath p1 = getRandomMember(population);
-				GeneticPath p2 = getRandomMember(population);
+				final GeneticPath p1 = getRandomMember(population);
+				final GeneticPath p2 = getRandomMember(population);
 				/*GeneticPath p1 = Collections.min(population);
 				population.remove(p1);
 				GeneticPath p2 = Collections.min(population);
 				population.add(p1);*/
 				GeneticPath child = p1.breed(p2);
 				if(Math.random()<MUTATION_CHANCE){
-					Random random = new Random();
-					int i = random.nextInt(child.size()-1);
-					int j = random.nextInt(child.size()-1);
+					final Random random = new Random();
+					final int i = random.nextInt(child.size()-1);
+					final int j = random.nextInt(child.size()-1);
 					child = child.swap(i, j);
 				}
 				newPopulation.add(child);
@@ -60,13 +60,13 @@ public class GeneticAlgorithm {
 		try{
 			Writer.writeToFile(parser.getName(),parser.getSize(),finalPath);
 		}
-		catch(Exception e){
+		catch(final Exception e){
 			System.out.println("An error occurred writing the file.");
 		}
 	}
 	
-	private static GeneticPath getRandomMember(ArrayList<GeneticPath> population){
-		Random random = new Random();
+	private static GeneticPath getRandomMember(final ArrayList<GeneticPath> population){
+		final Random random = new Random();
 		GeneticPath path = null;
 		Collections.sort(population);
 		/*int iterations = random.nextInt(population.size()-1)+1;
@@ -74,12 +74,12 @@ public class GeneticAlgorithm {
 		for(int i = 0;i<iterations;i++){
 			space.scown.travellingsalesman.path = it.next();
 		}*/
-		int iSquared = (population.size())*(population.size());
-		int randomIndex = random.nextInt(iSquared)+1;
+		final int iSquared = (population.size())*(population.size());
+		final int randomIndex = random.nextInt(iSquared)+1;
 		int i = 0;
 		while(path==null){
-			int bah = (population.size()-i-1);
-			int index = (bah*bah);
+			final int bah = (population.size()-i-1);
+			final int index = (bah*bah);
 			if(index<randomIndex){
 				path = population.get(i);
 			}
