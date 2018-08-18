@@ -7,10 +7,10 @@
 package space.scown.travellingsalesman.graph;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Graph<T> {
 
@@ -23,7 +23,7 @@ public class Graph<T> {
 
         for (final Arc<T> arc : arcs) {
             if (!table.containsKey(arc.getStart())) {
-                table.put(arc.getStart(), new HashSet<>());
+                table.put(arc.getStart(), new TreeSet<>());
             }
 
             table.get(arc.getStart()).add(arc);

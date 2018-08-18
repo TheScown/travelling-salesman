@@ -7,6 +7,7 @@
 package space.scown.travellingsalesman.bestfirst;
 
 import space.scown.travellingsalesman.graph.Arc;
+import space.scown.travellingsalesman.graph.Graph;
 import space.scown.travellingsalesman.salesman.Parser;
 import space.scown.travellingsalesman.salesman.Path;
 import space.scown.travellingsalesman.salesman.Writer;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 class GreedyBestFirstSearch {
@@ -23,6 +25,7 @@ class GreedyBestFirstSearch {
      * A greedy best first search algorithm.  From each city,
      * takes the shortest available route until a tour is found.
      * Returns the shortest tour in a file.
+     *
      * @param args Input filename
      */
     public static void main(final String[] args) throws IOException {
@@ -30,37 +33,24 @@ class GreedyBestFirstSearch {
 
         final Collection<Path> paths = new HashSet<>();
 
-        for(final Integer node : parser.getGraph().getNodes()){
+        final Graph<Integer> graph = parser.getGraph();
+
+        for (final Integer node : graph.getNodes()) {
             final Path path = new Path();
-            final int i = node;
-            path.add(i,0);
+            path.add(node, 0);
 
-            while(path.size()<parser.getSize()){
+            while (path.size() < parser.getSize()) {
                 final Integer n = path.getLast();
-                final Set<Arc<Integer>> arcs = parser.getGraph().startingAt(n);
-                boolean added = false;
+                final Set<Arc<Integer>> arcs = graph.startingAt(n);
 
-                while(!added){
-                    final Arc<Integer> arc = Collections.min(arcs);
+                final Optional<Arc<Integer>> shortestEdge = arcs.stream()
+                        .filter(arc -> !path.contains(arc.getEnd()))
+                        .findFirst();
 
-                    if(!path.contains(arc.getEnd())){
-                        path.add(arc.getEnd(), arc.getWeight());
-                        added = true;
-                    }
-                    else{
-                        arcs.remove(arc);
-                    }
-                }
+                shortestEdge.ifPresent(arc -> path.add(arc.getEnd(), arc.getWeight()));
             }
 
-            final Integer n = path.getLast();
-            final Iterable<Arc<Integer>> arcs = parser.getGraph().startingAt(n);
-
-            for(final Arc<Integer> arc : arcs){
-                if(arc.isEnd(node)){
-                    path.add(i, arc.getWeight());
-                }
-            }
+            path.add(node, graph.distance(path.getLast(), node));
 
             paths.add(path);
         }
